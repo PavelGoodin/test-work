@@ -11,9 +11,7 @@ class Company extends Model
 	use HasFactory;
 	
     protected $table = 'companies';
-	protected $fillable = [
-		'name', 'description','location'
-	];
+	protected $fillable = ['name', 'description','location'];
     /**
      * все игры выпущеные данной компанией
      */

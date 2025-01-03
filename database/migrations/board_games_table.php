@@ -15,10 +15,14 @@ return new class extends Migration
         Schema::create('board_games', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longText('descriptions');
-            $table->unsignedTinyInteger('developer_studio_id');
+            $table->longText('description');
+            $table->tinyInteger('min_number_of_players')->default(1);
+            $table->tinyInteger('max_number_of_players')->default(4);
+            $table->string('age_of_players')->default('10');
+            $table->string('play_time')->default('30-60');
+            $table->smallInteger('company_id');
             $table->string('foto')->default('simple.png');
-            $table->Integer('rating');
+            $table->float('rating')->default(5.0);
             $table->timestamps();
             $table->boolean('hide')->default(0);
             

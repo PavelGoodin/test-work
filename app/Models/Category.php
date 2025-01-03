@@ -11,10 +11,9 @@ class Category extends Model
 	use HasFactory;
 	
     protected $table = 'categories';
-	protected $fillable = [
-		'name', 'description'
-	];
+	protected $fillable = ['name', 'description'];
 
+//Все игры в данной категории
     public function board_games():BelongsToMany
     {
         return $this->belongsToMany(BoardGame::class, 'category_board_game');
