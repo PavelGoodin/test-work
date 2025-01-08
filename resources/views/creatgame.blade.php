@@ -6,30 +6,37 @@
   <!-- Контент здесь -->
 
 
-<form>
+<form action = "{{route('boardgames.add')}}"  method="POST">
+@csrf
   <div class="mb-3">
     <label for="InputName" class="form-label">Название игры</label>
-    <input type="text" class="form-control" id="InputName">
-    <div id="emailHelp" class="form-text">Мы никогда никому не передадим вашу электронную почту.</div>
+    <input type="text" class="form-control" name="InputName">
   </div>
 
 
   <div class="mb-3">
     <label for="InputDescription" class="form-label">Краткое описание</label>
-    <input type="text" class="form-control" id="InputDescription">
+    <input type="text" class="form-control" name="InputDescription">
   </div>
 
-  <select class="form-select" aria-label="Выберите фирму которая локализует">
-  <option selected>Локализация</option>
-  <option value="1">Один</option>
-  <option value="2">Два</option>
-  <option value="3">Три</option>
-</select>
+  <div class="mb-3">
+  <label class="form-label">Локализация</label>
 
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Проверить меня</label>
+  <select class="form-select" name="company_id" aria-label="Выберите фирму которая локализует">
+  @foreach($companies as $company)
+          <option value="{{ $company->id }}">{{ $company->name }}</option>
+  @endforeach
+  </select>
+  
   </div>
+  
+  @foreach($categories as $category)
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="{{$category->id}}" name="category_{{$category->id}}">
+    <label class="form-check-label" for="flexCheckDefault">{{$category->name}}</label>
+  </div>
+  @endforeach
+
   <button type="submit" class="btn btn-primary">Сохранить</button>
 </form>
 

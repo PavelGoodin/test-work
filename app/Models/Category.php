@@ -11,7 +11,7 @@ class Category extends Model
 	use HasFactory;
 	
     protected $table = 'categories';
-	protected $fillable = ['name', 'description'];
+	protected $fillable = ['id','name', 'description'];
 
 //Все игры в данной категории
     public function board_games():BelongsToMany

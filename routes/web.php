@@ -13,3 +13,9 @@ Route::get('/boardgames/create', [BoardGameController::class, 'create'])
 
   Route::get('/boardgames', [BoardGameController::class, 'index'])
   ->name('boardgames.index');
+
+  Route::get('/boardgames/search', [BoardGameController::class, 'search'])
+  ->name('boardgames.search');
+
+  Route::post('/boardgames/add_game', [BoardGameController::class, 'store'])
+  ->name('boardgames.add');

@@ -16,7 +16,10 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @else
             <style>
-
+                .icon-button {
+                background-image: url("../img/icon.svg");
+                background-size: 90px 97px;
+            }
             </style>
         @endif
     </head>
@@ -32,4 +35,13 @@
             @yield('content')
         </div>
     </body>
+    <script>
+    var select = document.getElementById("select_search");
+    //обработка select поиск по копаниям
+    select.addEventListener("change", function(){
+        console.log(window.location.origin);
+        const cleanUrl = `${window.location.origin}${window.location.pathname}`+ "/search";
+        location.href = window.location.origin + "/test-work/test-work/public/boardgames/search?company_id="+select.value;
+        })
+    </script>
 </html>
