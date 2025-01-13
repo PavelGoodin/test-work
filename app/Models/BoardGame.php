@@ -12,7 +12,7 @@ class BoardGame extends Model
 	use HasFactory;
 	
     protected $table = 'board_games';
-	protected $fillable = ['name', 'description','min_number_of_players','max_number_of_players','age_of_players','play_time','company_id','foto','rating'];
+	protected $fillable = ['name', 'description','min_number_of_players','max_number_of_players','age_of_players','play_time','company_id','foto','rating','hide'];
     /**
      * категории для данной игры.
      */

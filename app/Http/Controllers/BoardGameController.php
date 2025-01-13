@@ -10,14 +10,13 @@ use App\Models\Company;
 class BoardGameController extends Controller
 {
 
-    // Вывод формы
+    // Вывод формы добавления игры
     public function create()
     {
-        // Передаем в шаблон вновь созданный объект. Он нужен для вывода формы
+        // Передаем в шаблон коллекции.(игры,компании,категории)
         $board_game = BoardGame::all();
         $companies = Company::all();
         $categories = Category::all();
-        
         return view('creatgame', compact('board_game','companies','categories'));
 
     }
@@ -26,18 +25,25 @@ class BoardGameController extends Controller
     public function index()
     {
         //Получаем все игры
-        $board_games = BoardGame::all();
+        $board_games = BoardGame::where('hide','0')->get();
         $companies = Company::all();
-        return view('tablegames', compact('board_games','companies'));
+        $company_id = 0;
+        return view('tablegames', compact('board_games','companies','company_id'));
 
     }
+
     // Поиск по компании локализации
     public function search(Request $request)
     {
+        $company_id = $request->input('company_id');
+        if($company_id==0){  $board_games = BoardGame::where('hide','0')->get();  }
+        else {
         //Ищем игры по company_id
         $board_games = BoardGame::where('company_id',$request->input('company_id'))->get();
+        }
         $companies = Company::all();
-        return view('tablegames', compact('board_games','companies'));
+        
+        return view('tablegames', compact('board_games','companies','company_id'));
 
     }
     
@@ -58,16 +64,25 @@ class BoardGameController extends Controller
         $board_game->rating = 5.0;
         $board_game->save();
 
-        
         //Добавляем выбранные категории
         foreach($categories as $category)
         {
         if( !empty($request->input("category_".$category->id)) )$board_game->categories()->attach($request->input("category_".$category->id)); 
         }
-
-        dd($board_game->categories());
         return view('tablegames');
 
+    }
+
+    public function hide($id)
+    {
+        //ищем игру по id
+        $board_game = BoardGame::find($id);
+        //если нашли, то скрываем
+        if ($board_game) {
+            $board_game->hide = 1;
+            $board_game->save();
+        }
+    return redirect()->route('boardgames.index');
     }
 
 

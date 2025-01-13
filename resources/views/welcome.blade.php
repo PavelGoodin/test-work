@@ -36,10 +36,12 @@
         </div>
     </body>
     <script>
-    var select = document.getElementById("select_search");
+    let select = document.getElementById("select_search");
+    console.log("{{$company_id}}");
+    select["{{$company_id}}"].selected = true;
     //обработка select поиск по копаниям
     select.addEventListener("change", function(){
-        console.log(window.location.origin);
+        console.log(select.value);
         const cleanUrl = `${window.location.origin}${window.location.pathname}`+ "/search";
         location.href = window.location.origin + "/test-work/test-work/public/boardgames/search?company_id="+select.value;
         })

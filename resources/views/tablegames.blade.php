@@ -2,7 +2,7 @@
 @section('content')
 
 <select class="search-select" name="search_company" id="select_search" aria-label="Выберите фирму которая локализует">
-            <option value='0'>Все игры</option>
+            <option value="0">Все игры</option>
              @foreach($companies as $company)
             <option value="{{ $company->id }}">{{ $company->name }}</option>
             @endforeach
@@ -31,10 +31,10 @@
       <td>{{$board_game->rating}}</td>
       <td>@foreach($board_game->categories as $category){{$category->name}}<br>@endforeach</td>
       <td>{{$board_game->company->name}}</td>
-      <td><button type="button">
-          <span class="icon-button"></span>
-          удалить
-          </button>
+      <td>
+      <a href="{{ route('boardgames.delete', [ 'id' => $board_game->id ]) }}" >
+        Удалить
+      </a>
       </td>
 
     </tr>
